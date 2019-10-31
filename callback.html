@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>iz*one 郵差</title>
+    <h2 id="result"></h2>
+</head>
+<body>
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+  const resultDiv = document.querySelector('#result');
+
+  const params = (new URL(document.location)).searchParams;
+  const returnState = params.get("state");
+  const code = params.get("code");
+  const state = localStorage.getItem("state");
+  const event = localStorage.getItem("event");
+
+  if (state !== returnState || code === null || event === null) {
+    resultDiv.innerHTML = 'Error! Who r u?';
+  } else {
+    axios.post('https://l6f354alzg.execute-api.ap-northeast-1.amazonaws.com/default/line-notify', {
+      event: event,
+      code: code,
+    })
+      .then(function () {
+        resultDiv.innerHTML = '恭喜！已連結成功';
+        localStorage.clear();
+      })
+      .catch(function (error) {
+        console.log(error);
+        resultDiv.innerHTML = '連接失敗，請重新連結';
+      });
+  }
+
+</script>
+</body>
+</html>

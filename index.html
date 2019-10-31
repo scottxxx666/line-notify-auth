@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Line Notify 連結</title>
+</head>
+<body>
+
+<script>
+  const params = (new URL(document.location)).searchParams;
+  const event = params.get("event");
+  localStorage.setItem("event", event);
+
+  const state = Math.random().toString(36).substr(2, 8);
+  localStorage.setItem("state", state);
+
+  const redirectUri = 'https://scottxxx666.github.io/line-notify-auth/callback.html';
+  const clientId = '1xC4lOHFSpZ7yCmJxVcw5p';
+  window.location.href = `https://notify-bot.line.me/oauth/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=code&scope=notify&state=${state}`;
+</script>
+</body>
+</html>
