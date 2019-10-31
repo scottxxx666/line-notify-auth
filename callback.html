@@ -21,6 +21,7 @@
     resultDiv.innerHTML = 'Error! Who r u?';
   } else {
     axios.post('https://l6f354alzg.execute-api.ap-northeast-1.amazonaws.com/default/line-notify', {
+      action: 'REGISTER',
       event: event,
       code: code,
     })
