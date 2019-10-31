@@ -16,6 +16,7 @@
   const code = params.get("code");
   const state = localStorage.getItem("state");
   const event = localStorage.getItem("event");
+  const key = 'YuH6vZOEzT1ZCpykTYAgzgaZYygbotM3j5jBf9X2';
 
   if (state !== returnState || code === null || event === null) {
     resultDiv.innerHTML = 'Error! Who r u?';
@@ -24,7 +25,7 @@
       action: 'REGISTER',
       event: event,
       code: code,
-    })
+    }, { headers: { 'x-api-key': key } })
       .then(function () {
         resultDiv.innerHTML = '恭喜！已連結成功';
         localStorage.clear();
